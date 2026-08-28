@@ -1,3 +1,4 @@
+import pandas as pd
 import pickle
 
 
@@ -16,13 +17,20 @@ projects = int(input("Enter Number of Projects: "))
 internship = int(input("Internship (1 = Yes, 0 = No): "))
 
 
-student = [[
+student = pd.DataFrame([[
     cgpa,
     attendance,
     coding_score,
     projects,
     internship
-]]
+]], columns=[
+    "CGPA",
+    "Attendance",
+    "CodingScore",
+    "Projects",
+    "Internship"
+])
+
 
 prediction = model.predict(student)[0]
 
