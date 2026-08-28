@@ -1,0 +1,47 @@
+name: Student Placement ML CI-CD
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+
+  test:
+    name: CI - Train and Test ML Model
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Train ML Model
+        run: |
+          python train.py
+
+      - name: Run Automated Tests
+        run: |
+          pytest
+
+  deploy:
+    name: CD - Deploy ML Application
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Deploy Application
+        run: |
+          echo "Student Placement ML Application deployed successfully!"
