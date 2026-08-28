@@ -14,4 +14,4 @@ def test_model_can_predict():
 
     prediction = model.predict(student)
 
-    assert prediction[0] in [0, 1]
+    assert prediction[0] == 5
